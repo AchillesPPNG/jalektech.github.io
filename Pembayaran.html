@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<!-- my css -->
+</head>
+<body>
+
+    <div class="container-fluid pt-5 pb-5 kontak">
+        <div class="container">
+            <h2 class="display-3 text-center" id="kontak">Pembayaran</h2>
+            <p class="text-center">Silahkan isi data diri dan alamat</p>
+            <div class="row pb-3">
+                <div class="col-md">
+                    <input id="name" class="form-control form-control-lg mb-3" type="text" placeholder="Nama">
+                    <input id="email" class="form-control form-control-lg mb-3" type="text" placeholder="Email">
+                    <input id="address" class="form-control form-control-lg mb-3" type="text" placeholder="Alamat">
+                    <input id="product" class="form-control form-control-lg mb-3" type="text" placeholder="Barang" readonly>
+                    <input id="price" class="form-control form-control-lg mb-3" type="text" placeholder="Harga" readonly>
+                    <select id="payment" class="form-select" aria-label="Default select example">
+                        <option selected>Pilih metode pembayaran</option>
+                        <option value="Shopee Pay">Shopee Pay</option>
+                        <option value="OVO">OVO</option>
+                        <option value="DANA">DANA</option>
+                        <option value="Cash On Delivery">Cash On Delivery</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mx-auto text-center">
+                <button id="submitBtn" type="button" class="btn btn-danger btn-l">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk mendapatkan nilai dari parameter URL
+        function getQueryParam(param) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Menampilkan data produk dari URL ke dalam form
+        document.getElementById('product').value = getQueryParam('product');
+        document.getElementById('price').value = getQueryParam('price');
+
+        // Saat tombol submit ditekan, kirim data ke halaman invoice
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var address = document.getElementById('address').value;
+            var product = document.getElementById('product').value;
+            var price = document.getElementById('price').value;
+            var payment = document.getElementById('payment').value;
+
+            window.location.href = 'invoice.html?name=' + encodeURIComponent(name) +
+                                   '&email=' + encodeURIComponent(email) +
+                                   '&address=' + encodeURIComponent(address) +
+                                   '&product=' + encodeURIComponent(product) +
+                                   '&price=' + encodeURIComponent(price) +
+                                   '&payment=' + encodeURIComponent(payment);
+        });
+    </script>
+
+</body>
+</html>
